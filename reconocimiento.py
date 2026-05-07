@@ -107,7 +107,7 @@ def extract_features(file):
     print(f"Max valor: {max_val}")
 
     if max_val < 1e-5:
-        print("❌ Señal casi cero")
+        print("Señal casi cero")
         return None
 
     signal = signal / max_val
@@ -121,7 +121,7 @@ def extract_features(file):
     print(f"Frames generados: {len(frames)}")
 
     if len(frames) == 0:
-        print("❌ No hay frames")
+        print("No hay frames")
         return None
 
     frames = apply_hamming(frames)
@@ -131,7 +131,7 @@ def extract_features(file):
     print(f"LPC frames: {len(lpc)}")
 
     if len(lpc) == 0:
-        print("❌ LPC falló")
+        print("LPC falló")
         return None
 
     return lpc
@@ -162,11 +162,11 @@ for f in train_files:
     feats = extract_features(f)
 
     if feats is None:
-        print(f"{f} → ❌ VAD o extracción falló")
+        print(f"{f} → VAD o extracción falló")
         continue
 
     if len(feats) == 0:
-        print(f"{f} → ❌ sin features")
+        print(f"{f} → sin features")
         continue
 
     print(f"{f} → ✔ OK ({len(feats)} frames)")
@@ -192,7 +192,7 @@ for f in test_files:
     feats = extract_features(f)
 
     if feats is None:
-        print(f"{f} → ❌ ERROR en VAD")
+        print(f"{f} → ERROR en VAD")
         continue
 
     dist = distance_to_codebook(feats, codebook)
